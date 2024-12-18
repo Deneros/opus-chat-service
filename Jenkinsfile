@@ -24,7 +24,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'opus-githubapp',
+                withCredentials([usernamePassword(credentialsId: 'githubapp-jenkins',
                                                  usernameVariable: 'GITHUB_APP',
                                                  passwordVariable: 'GITHUB_ACCESS_TOKEN')]) {
                     script {
