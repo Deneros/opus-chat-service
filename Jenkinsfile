@@ -30,7 +30,7 @@ pipeline {
                     script {
                         sh "docker --version" 
                         // Authenticate with GitHub using Docker
-                        sh "echo ${GITHUB_ACCESS_TOKEN} | docker login ghcr.io -u ${APP_ID} --password-stdin"
+                        sh "echo ${GITHUB_ACCESS_TOKEN} | docker login ghcr.io -u ${GITHUB_APP} --password-stdin"
                         // Push the image
                         sh "docker push ${DOCKER_IMAGE}"
                     }
