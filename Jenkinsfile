@@ -24,14 +24,14 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'opus-githubapp',
-                                                 usernameVariable: 'GITHUB_APP',
-                                                 passwordVariable: 'GITHUB_ACCESS_TOKEN')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-pat',
+                                                 usernameVariable: 'GITHUB_USER',
+                                                 passwordVariable: 'GITHUB_PAT')]) {
                     script {
-                        sh "docker --version" 
-                        // Authenticate with GitHub using Docker
-                        sh "echo ${GITHUB_ACCESS_TOKEN} | docker login ghcr.io -u ${GITHUB_APP} --password-stdin"
-                        // Push the image
+                        // Docker login using PAT
+                        sh "echo ${GITHUB_PAT} | docker login ghcr.io -u ${GITHUB_USER} --password-stdin"
+                        
+                        // Push the Docker image
                         sh "docker push ${DOCKER_IMAGE}"
                     }
                 }
