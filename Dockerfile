@@ -5,6 +5,9 @@ WORKDIR /app
 COPY build.gradle settings.gradle gradlew ./
 COPY gradle ./gradle
 
+# Cambiar permisos para el archivo gradlew
+RUN chmod +x gradlew
+
 COPY src ./src
 
 RUN ./gradlew build --no-daemon --exclude-task bootJar --exclude-task test
