@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-service
+spec:
+  selector:
+    app: chat-service
+  ports:
+    - protocol: TCP
+      port: 8081       # Puerto del servicio Kubernetes
+      targetPort: 8081 # Puerto del contenedor
+  type: ClusterIP       # Acceso interno dentro del clúster
