@@ -24,11 +24,9 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([gitHubApp(
-                    credentialsId: "opus-githubapp",
-                    appIDVariable: 'APP_ID',
-                    privateKeyVariable: 'PRIVATE_KEY'
-                )]) {
+                withCredentials([usernamePassword(credentialsId: 'opus-githubapp',
+                                                 usernameVariable: 'GITHUB_APP',
+                                                 passwordVariable: 'GITHUB_ACCESS_TOKEN')]) {
                     script {
                         sh "docker --version" 
                         // Authenticate with GitHub using Docker
