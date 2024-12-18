@@ -23,7 +23,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withCredentials([gitHubApp(
-                    credentialsId: "github-app-credentials",
+                    credentialsId: "opus-githubapp",
                     appIDVariable: 'APP_ID',
                     privateKeyVariable: 'PRIVATE_KEY'
                 )]) {
