@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'opus-agent'  
+    }
 
     environment {
         DOCKER_IMAGE = "ghcr.io/deneros/chat-service:latest"
@@ -28,9 +30,9 @@ pipeline {
                     privateKeyVariable: 'PRIVATE_KEY'
                 )]) {
                     script {
+                        sh "docker --version" 
                         // Authenticate with GitHub using Docker
                         sh "echo ${PRIVATE_KEY} | docker login ghcr.io -u ${APP_ID} --password-stdin"
-
                         // Push the image
                         sh "docker push ${DOCKER_IMAGE}"
                     }
