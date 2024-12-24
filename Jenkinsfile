@@ -34,7 +34,8 @@ pipeline {
             steps {
                 script {
                     // Actualiza el Deployment en Kubernetes
-                    sh "kubectl set image deployment/chat-service chat-service=${DOCKER_IMAGE} --record"
+                    sh "kubectl set image deployment/chat-service chat-service=${DOCKER_IMAGE} -n default --record"
+
                 }
             }
         }
